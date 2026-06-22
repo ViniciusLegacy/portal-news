@@ -34,3 +34,13 @@
 .text-sm {
     font: var(--text-sm);
 }
+
+.desktop-only {
+    display: none;
+}
+
+@media (width >= 80em) {
+    .desktop-only {
+        display: initial;
+    }
+}
