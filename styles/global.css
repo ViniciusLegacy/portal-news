@@ -68,9 +68,9 @@ main {
     display: inline-block;
     width: fit-content;
     background-color: var(--brand-color-dark);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font: 500 10px/1.2 var(--font-family);
+    padding: 0.25rem .5rem;
+    border-radius: .25rem;
+    font: 500 0.625rem/1.2 var(--font-family);
     text-transform: uppercase;
     letter-spacing: 0.04rem;
     color: var(--text-color-primary);
@@ -86,7 +86,7 @@ main {
     main {
         padding-block: 2.5rem 5rem;
         row-gap: 5rem;
-        column-gap: 32px;
+        column-gap: 2rem;
 
         grid-template-columns: 2fr 1.5fr;
         grid-template-areas: 
