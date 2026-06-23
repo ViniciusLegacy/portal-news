@@ -1,11 +1,12 @@
 # TecNews — Portal de Notícias
 
-Projeto de estudos focado na prática de **CSS Grid**, desenvolvido como um portal de notícias de tecnologia fictício. O objetivo foi explorar na prática os principais recursos do Grid Layout, desde estruturas simples até padrões mais elaborados com áreas nomeadas, sobreposição de conteúdo e composição de seções assimétricas.
+Projeto de estudos focado na prática de **CSS Grid**, desenvolvido como um portal de notícias de tecnologia fictício. O objetivo foi explorar na prática os principais recursos do Grid Layout, desde estruturas simples até padrões mais elaborados com áreas nomeadas, sobreposição de conteúdo e composição de seções assimétricas — incluindo a adaptação completa do layout para mobile e desktop.
 
 ## Tecnologias utilizadas
 
 - **HTML5** — estrutura semântica com `<article>`, `<aside>`, `<figure>`, `<figcaption>` e `<nav>`
-- **CSS3** — CSS Grid, variáveis customizadas, `aspect-ratio`, `object-fit`, pseudo-elementos e hover states
+- **CSS3** — CSS Grid, nesting (`&`), media queries, variáveis customizadas, `aspect-ratio`, `object-fit`, pseudo-elementos e hover states
+- **Design responsivo** — layout mobile-first com breakpoint único para desktop
 - **Google Fonts** — fonte [Archivo](https://fonts.google.com/specimen/Archivo) com eixo de peso variável (100–900)
 
 ## Estrutura do projeto
@@ -27,16 +28,19 @@ portal-news/
 
 ## Layout
 
-O layout principal é definido por um `grid-template-areas` com duas colunas (`2fr 1.5fr`) e três linhas:
+O layout é **mobile-first**: por padrão, todas as seções seguem em uma única coluna. A partir do breakpoint `80em` (1280px), o `grid-template-areas` do `<main>` muda para duas colunas (`2fr 1.5fr`) em três linhas:
 
 ```
-┌───────────────────────────┐
-│         featured          │  (span 2 colunas)
-├───────────────────────────┤
-│          weekly           │  (span 2 colunas)
-├──────────────┬────────────┤
-│      ai      │   aside    │  (2fr | 1.5fr)
-└──────────────┴────────────┘
+Mobile (< 80em)              Desktop (≥ 80em)
+┌──────────────┐             ┌───────────────────────────┐
+│   featured   │             │         featured          │  (span 2 colunas)
+├──────────────┤             ├───────────────────────────┤
+│    weekly    │             │          weekly           │  (span 2 colunas)
+├──────────────┤             ├──────────────┬────────────┤
+│      ai      │             │      ai      │   aside    │  (2fr | 1.5fr)
+├──────────────┤             └──────────────┴────────────┘
+│    aside     │
+└──────────────┘
 ```
 
 ### Seções
@@ -51,18 +55,26 @@ O layout principal é definido por um `grid-template-areas` com duas colunas (`2
 
 ## Conceitos de CSS Grid praticados
 
-- **`grid-template-areas`** — definição semântica das regiões do layout
-- **`grid-template-columns`** com unidades `fr` e valores fixos (`px`)
-- **`grid-auto-flow: column`** — fluxo horizontal em listas de artigos
-- **`grid-column: span 2`** — células que ocupam múltiplas colunas
-- **`gap`** — espaçamento consistente entre células (16px e 32px)
+- **`grid-template-areas`** — definição semântica das regiões do layout, redefinida por breakpoint
+- **`grid-template-columns`** com unidades `fr` e valores fixos (`rem`)
+- **`grid-auto-flow: column`** — fluxo horizontal em listas de artigos (reorganizado em coluna no mobile)
+- **`order`** — inversão da ordem de imagem/texto entre mobile e desktop na seção AI
+- **`gap`** — espaçamento consistente entre células, em `rem`
 - **`aspect-ratio`** — proporções uniformes para imagens (1:1, 16:9)
 - **`object-fit: cover`** — preenchimento responsivo de imagens sem distorção
+
+## Responsividade
+
+- **Mobile-first**: estilos base pensados para telas pequenas, com um único breakpoint `@media (width >= 80em)` para desktop
+- **Nesting CSS** (`&`) para escopar as regras de cada media query dentro do próprio seletor
+- **Classes utilitárias `.mobile-only` / `.desktop-only`** para alternar textos completos (mobile) por versões truncadas (desktop) sem duplicar marcação via JS
+- **Unidades relativas (`rem`)** no lugar de `px` para espaçamentos, larguras e tipografia
+- **`overflow-x: scroll`** na navegação secundária do header em telas pequenas
 
 ## Outros destaques
 
 - **Tema escuro** com paleta em tons de azul-ardósia (`#0F172A` de fundo, `#60A5FA` de destaque)
 - **Variáveis CSS** (`--brand-color`, `--font-size-*`, etc.) para um sistema de design consistente
 - **Gradiente sobre imagens** via pseudo-elemento `::before` para garantir legibilidade das legendas sobrepostas
-- **Classes utilitárias** (`.grid`, `.grid-flow-col`, `.grid-cols-2`, `.gap-*`) para reduzir repetição de código
+- **Classes utilitárias** (`.grid`, `.grid-flow-col`, `.gap-*`) para reduzir repetição de código
 - **Ícones com estado de hover** — setas com imagem de background alternada no `:hover`
