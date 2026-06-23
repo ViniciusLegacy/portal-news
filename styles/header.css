@@ -40,4 +40,10 @@
             }
         }
     }
+
+    #secondary {
+        justify-content: space-between;
+        overflow-x: hidden;
+        gap: 0;
+    }
 }

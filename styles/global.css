@@ -47,26 +47,26 @@ h1, h2, h3 {
 }
 
 .container {
-    max-width: 1280px;
+    max-width: 22.5rem;
     padding-inline: 1rem;
     margin-inline: auto;
 }
 
 main {
-    margin-top: 40px;
-    row-gap: 80px;
-    column-gap: 32px;
+    padding-block: 1rem 2.5rem;
+    row-gap: 2rem;
 
-    grid-template-columns: 2fr 1.5fr;
-
+    grid-template-columns: 1fr;
     grid-template-areas: 
-    "featured featured"
-    "weekly weekly"
-    "ai aside";
+    "featured"
+    "weekly"
+    "ai"
+    "aside";
 }
 
 .content-tag {
     display: inline-block;
+    width: fit-content;
     background-color: var(--brand-color-dark);
     padding: 4px 8px;
     border-radius: 4px;
@@ -75,4 +75,23 @@ main {
     letter-spacing: 0.04rem;
     color: var(--text-color-primary);
     box-shadow: 0px 4px 16px rgba(2, 6, 23, 0.25);
+}
+
+@media (width >= 80em) {
+    .container {
+        max-width: 80rem;
+        padding-inline: 2rem;
+    }
+
+    main {
+        padding-block: 2.5rem 5rem;
+        row-gap: 5rem;
+        column-gap: 32px;
+
+        grid-template-columns: 2fr 1.5fr;
+        grid-template-areas: 
+        "featured featured"
+        "weekly weekly"
+        "ai aside";
+    }
 }
